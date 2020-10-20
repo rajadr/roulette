@@ -21,19 +21,19 @@ public class RouletteGame extends Thread {
         try {
             spinThread.start();
 
-            System.out.println("Thread Started");
+            //System.out.println("Thread Started");
 
             //30 seconds to receive the user bets
             spinThread.sleep(sleeptimer);
             spinThread.interrupt();
             scanner.reset();
             scanner.close();
-            System.out.println("Thread Interrupted");
+            //System.out.println("Thread Interrupted");
 
             /* Generate the Roulette Number */
             int rouletteNum = getRouletteNumber();
 
-            System.out.println("Generated Roulette Number :" + rouletteNum);
+            //System.out.println("Generated Roulette Number :" + rouletteNum);
 
             //validateWinner
             computeResults(rouletteNum);
@@ -45,16 +45,16 @@ public class RouletteGame extends Thread {
 
         @Override
         public void run(){
-            System.out.println("Thread Started Running");
+            //System.out.println("Thread Started Running");
             //Get the Registered Players from the file
             fetchPlayersData();
 
-            System.out.println("Thread Running");
+            //System.out.println("Thread Running");
 
             while (!Thread.interrupted()) {
                 getBetInputs(vecPlayerList);
             }
-            System.out.println("Exiting While loop");
+            //System.out.println("Exiting While loop");
 
         }
 
@@ -133,9 +133,9 @@ public class RouletteGame extends Thread {
                 betVal = Double.parseDouble(items[1]);
             }
 
-            //System.out.println("Input For Bets Received"+betValue);
-            System.out.println("Input For Bets Option: "+betOp);
-            System.out.println("Input For Bets Value: "+betVal);
+//            System.out.println("Input For Bets Received"+betValue);
+//            System.out.println("Input For Bets Option: "+betOp);
+//            System.out.println("Input For Bets Value: "+betVal);
 
             //Parameters user-name, Bet Option, Bet Amount
             recordBets(userNames.get(userSeq-1), betOp, betVal);
@@ -156,23 +156,23 @@ public class RouletteGame extends Thread {
         betOpRecord.add(3, 0.0); //Winning Amount; will be updated by the "spin" routine
 
         if (betMap.get(betUser) != null) {
-            System.out.println("Inside Array list update-getUser NOT-Null");
+            //System.out.println("Inside Array list update-getUser NOT-Null");
             //System.out.println("Bet User:"+betMap.get(betUser));
             //System.out.println(betUser+"\t"+betMap.get(betUser));
             tempBetOptionList = betMap.get(betUser);
 
             //tempBetOptionList.add(betMap.get(betUser));
-            System.out.println("Existing tmpBetList:\t" + tempBetOptionList);
+            //System.out.println("Existing tmpBetList:\t" + tempBetOptionList);
             tempBetOptionList.add(betOpRecord);
-            System.out.println("Updated tmpBetList:\t" + tempBetOptionList);
+            //System.out.println("Updated tmpBetList:\t" + tempBetOptionList);
         } else {
-            System.out.println("Inside Array list update-getUser IS-Null");
+            //System.out.println("Inside Array list update-getUser IS-Null");
             tempBetOptionList.add(betOpRecord);
         }
 
         betMap.replace(betUser,tempBetOptionList);
 
-        System.out.println(betUser+"\t"+tempBetOptionList);
+        //System.out.println(betUser+"\t"+tempBetOptionList);
 
         return tempBetOptionList;
     }
@@ -186,7 +186,7 @@ public class RouletteGame extends Thread {
             //Also generating it in random number of times
             for (int i = 0; i <= (rand.nextInt(10)+1); i++) {
                 rn = 1 + Math.abs(secRand.nextInt(36));
-                System.out.print(rn+"\t");
+                //System.out.print(rn+"\t");
             }
 
             return rn;
